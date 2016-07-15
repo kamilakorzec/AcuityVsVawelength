@@ -6,6 +6,8 @@ if(!window.app) {
     'ngRoute',
     'ui.bootstrap',
     'thesisApp.form',
+    'thesisApp.letters',
+    'thesisApp.statistics',
     'ui.router'
   ]).config(['$locationProvider', '$routeProvider',
     function ($locationProvider, $routeProvider) {
@@ -17,7 +19,22 @@ if(!window.app) {
         .state('letters', {
           url:'/letters',
           templateUrl: 'letters/letters.html',
-          controller: 'lettersCtrl'
+          controller: 'LettersCtrl',
+          params: {
+              info: {}
+          }
+          }
+        )
+        .state('form', {
+          url:'/',
+          templateUrl: 'form/form.html',
+          controller: 'FormCtrl'
+          }
+        )
+        .state('stats', {
+          url:'/stats',
+          templateUrl: 'statistics/statistics.html',
+          controller: 'StatsCtrl'
           }
         )
   }]);

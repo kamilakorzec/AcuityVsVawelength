@@ -30,7 +30,6 @@ angular.module('thesisApp.form', ['ngRoute'])
   };
 
   $scope.goToEtdrs = function () {
-    console.log($scope.info);
-    $state.go("letters");
+    $state.go("letters", {info: $scope.info});
   };
 }]);
