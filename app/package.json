@@ -1,0 +1,7 @@
+{
+  "name": "acuity-vs-wavelength",
+  "dependencies": {
+    "body-parser": "*",
+    "express": "^4.14.0"
+  }
+}
