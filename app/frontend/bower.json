@@ -15,5 +15,8 @@
     "bootstrap": "3.*",
     "d3": "4.1.1",
     "requirejs": "*"
+  },
+  "resolutions": {
+    "d3": "~3.3.10"
   }
 }

@@ -131,3 +131,7 @@ td, th {
     text-align: center;
     font-size: x-small;
 }
+
+.stats-divs {
+    margin-left: 50px;
+}

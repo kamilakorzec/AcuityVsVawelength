@@ -5,7 +5,7 @@
             <tbody>
                 <tr>
                     <th>ID</th><th>Wiek</th><th>Płeć</th><th>Wady wzroku</th>
-                    <th ng-repeat="lambda in data[1].info.acuity | orderBy: lambda[0]">{{lambda[0]}}</th>
+                    <th ng-repeat="lambda in lambdas">{{lambda}}</th>
                 </tr>
                 <tr ng-repeat="record in data" ng-if=" $index > 0 ">
                     <td>{{record.id}}</td>
@@ -23,12 +23,17 @@
                             </tr>
                         </table>
                     </td>
-                    <td ng-repeat="result in record.info.acuity | orderBy: result[0]">
+                    <td ng-repeat="result in record.info.acuity">
                         {{result[1] | number: 3}}
                     </td>
                 </tr>
             </tbody>
         </table>
-        {{lastResult}}
+        <div class="last-result">
+            <h2>Wykres - ostatni wynik</h2>
+        </div>
+        <div class="stats-chart">
+            <h2>Statystyki badań</h2>
+        </div>
     </div>
 </div>
