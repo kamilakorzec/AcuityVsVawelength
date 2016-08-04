@@ -11,8 +11,6 @@ if(!window.app) {
     'ui.router'
   ]).config(['$locationProvider', '$routeProvider',
     function ($locationProvider, $routeProvider) {
-    $locationProvider.hashPrefix('!');
-
     $routeProvider.otherwise({redirectTo: '/'});
   }]).config(['$stateProvider', function ($stateProvider) {
     $stateProvider
