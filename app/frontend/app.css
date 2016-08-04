@@ -123,3 +123,11 @@ span {
     margin-left: 30px;
     color: black;
 }
+
+/*stats view*/
+
+td, th {
+    padding: 0 8px;
+    text-align: center;
+    font-size: x-small;
+}

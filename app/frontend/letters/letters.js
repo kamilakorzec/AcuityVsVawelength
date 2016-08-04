@@ -9,17 +9,17 @@ angular.module('thesisApp.letters', ['ngRoute'])
   });
 }])
 
-.controller('LettersCtrl', ['$scope', '$stateParams', function($scope, $stateParams) {
+.controller('LettersCtrl', ['$scope', '$stateParams', '$http', '$state', function($scope, $stateParams, $http, $state) {
 
   var letters=[], error=0, logMar=1;
   var isCorrect=[];
   var lambdas = shuffle([400, 420, 440, 460, 480, 500, 520, 540, 560, 570, 580, 600, 620, 640, 660, 680, 700]);
   var l=0;
+  var letterHeight = 100;
   $scope.letterHeight = 100;
   var i = 0;
   var info = $stateParams.info ? $stateParams.info : {};
   info.acuity = [];
-  init();
 
   function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -62,10 +62,6 @@ angular.module('thesisApp.letters', ['ngRoute'])
     return rgbToHex(r,g,b);
   }
 
-  function sendData() {
-
-  }
-
   $scope.updateData = function($event){
     var letter = $event.charCode;
     if(letters.indexOf(String.fromCharCode(letter - 32)) !== -1) {
@@ -75,6 +71,7 @@ angular.module('thesisApp.letters', ['ngRoute'])
     else error++;
     if( error===3 ){
       info.acuity.push([$scope.lambda, logMar]);
+      $scope.letterHeight = letterHeight;
       l++;
       i = 0;
       logMar = 1;
@@ -86,10 +83,9 @@ angular.module('thesisApp.letters', ['ngRoute'])
       error=0;
       init();
     }
-  }
+  };
 
   function init() {
-    console.log(info.acuity);
     if( l<lambdas.length ) {
       letters = shuffle(['C', 'D', 'H', 'K', 'N', 'O', 'R', 'S', 'V', 'Z']);
       error = 0;
@@ -103,7 +99,11 @@ angular.module('thesisApp.letters', ['ngRoute'])
       $scope.lambda = lambdas[l];
       $scope.lambdaRgb = spectralColor($scope.lambda);
     }
-    else sendData();
+    else
+    {
+      $http.post('http://localhost:3000/results', {info: info});
+      $state.go('stats');
+    }
   }
 
   init();
