@@ -9,7 +9,7 @@ angular.module('thesisApp.statistics', ['ngRoute', 'ui.bootstrap'])
         });
     }])
 
-    .controller('StatsCtrl', [ '$scope', '$http', function($scope, $http) {
+    .controller('StatsCtrl', [ '$scope', '$http', '$state', function($scope, $http, $state) {
         function getResults() {
             $http.get('http://localhost:3000/results').then(function (response) {
                 $scope.data = response.data;
@@ -91,5 +91,10 @@ angular.module('thesisApp.statistics', ['ngRoute', 'ui.bootstrap'])
         }
 
         getResults();
+
+        $scope.toBeginning = function () {
+            console.log('hete');
+            $state.go('form', {refresh: true});
+        }
 
     }]);

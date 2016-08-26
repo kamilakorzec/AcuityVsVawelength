@@ -116,7 +116,6 @@
 .letters-container {
     height: inherit;
     text-align: center;
-    line-height: 100vh;
 }
 
 span {

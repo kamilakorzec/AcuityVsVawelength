@@ -12,14 +12,14 @@ angular.module('thesisApp.letters', ['ngRoute'])
 .controller('LettersCtrl', ['$scope', '$stateParams', '$http', '$state', function($scope, $stateParams, $http, $state) {
 
   var letters=[], error=0, logMar=1;
-  var isCorrect=[];
   var lambdas = shuffle([400, 420, 440, 460, 480, 500, 520, 540, 560, 570, 580, 600, 620, 640, 660, 680, 700]);
   var l=0;
-  var letterHeight = 100;
-  $scope.letterHeight = 100;
+  var letterHeight = 216;
+  $scope.letterHeight = 216;
   var i = 0;
   var info = $stateParams.info ? $stateParams.info : {};
   info.acuity = [];
+  $scope.letterAns = [];
 
   function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -62,14 +62,15 @@ angular.module('thesisApp.letters', ['ngRoute'])
     return rgbToHex(r,g,b);
   }
 
-  $scope.updateData = function($event){
-    var letter = $event.charCode;
-    if(letters.indexOf(String.fromCharCode(letter - 32)) !== -1) {
-      isCorrect[letters.indexOf(String.fromCharCode(letter - 32))] = 50;
-      logMar -= 0.02;
+  $scope.updateData = function(){
+    for(var i=0; i<5; i++){
+      if((letters[i] === $scope.letterAns[i])||(letters[i] === $scope.letterAns[i].toUpperCase())){
+        logMar -= 0.02;
+      }
+      else
+        error++
     }
-    else error++;
-    if( error===3 ){
+    if( error > 3 ){
       info.acuity.push([$scope.lambda, logMar]);
       $scope.letterHeight = letterHeight;
       l++;
@@ -77,10 +78,9 @@ angular.module('thesisApp.letters', ['ngRoute'])
       logMar = 1;
       init();
     }
-    i = (i+1)%5;
-    if( i===0 ) {
-      $scope.letterHeight = Math.round($scope.letterHeight/1.25892541179);
-      error=0;
+    else {
+      $scope.letterHeight = Math.round($scope.letterHeight / 1.25892541179);
+      error = 0;
       init();
     }
   };
@@ -89,6 +89,8 @@ angular.module('thesisApp.letters', ['ngRoute'])
     if( l<lambdas.length ) {
       letters = shuffle(['C', 'D', 'H', 'K', 'N', 'O', 'R', 'S', 'V', 'Z']);
       error = 0;
+
+      $scope.letterAns = [];
 
       $scope.letter1 = letters[0];
       $scope.letter2 = letters[1];
