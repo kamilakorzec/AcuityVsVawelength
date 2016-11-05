@@ -110,12 +110,20 @@
 /*letters view*/
 
 .letters-bg {
-  height: 100vh;
+    height: 100vh;
+    text-align: center;
 }
 
 .letters-container {
-    height: inherit;
-    text-align: center;
+    height: 95vh;
+}
+
+.letters-container span {
+    line-height: 95vh;
+}
+
+.letters-navigation {
+    height: 5vh;
 }
 
 span {
